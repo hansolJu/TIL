@@ -66,14 +66,14 @@ git-flow_overall_graph
 아래의 Repository와 Branch는 앞으로 설명을 할 때 나오기 때문에 알아 두시고 가면 한결 수월하게 보실 수 있을 거라고 생각합니다.
 
 * Repositories
-- upstream (Upstream Repository)
+    - upstream (Upstream Repository)
 
-- origin (Origin Repository)
+    - origin (Origin Repository)
 
 * Branches
-- feature-user (사용자 관련 기능을 구현하는 feature branch)
+    - feature-user (사용자 관련 기능을 구현하는 feature branch)
 
-- bfm-100_login_layout (사용자 관련 기능 중 레이아웃 작업 branch)
+    - bfm-100_login_layout (사용자 관련 기능 중 레이아웃 작업 branch)
 
 ### 1. 티켓 처리하기
 
