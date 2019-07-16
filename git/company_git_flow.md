@@ -19,6 +19,7 @@
 ## Git Repository 구성 살펴보기
 
 먼저 현재 Git Repository 구성부터 살펴보겠습니다. Repository는 Upstream Remote Repository(이하 Upstream Repository), Origin Remote Repository(이하 Origin Repository), Local Repository 이렇게 3부분으로 구성됩니다. Upstream Repository는 개발자들이 공유하는 저장소로 최신 소스코드가 저장되어 있는 원격 저장소입니다. Origin Repository는 Upstream Repository를 Fork한 원격 개인 저장소입니다. Local Repository는 내 컴퓨터에 저장되어 있는 개인 저장소입니다.
+
 ![](http://woowabros.github.io/img/2017-10-30/github-flow_repository_structure.png)
 
 github-flow-repository-structure
@@ -49,7 +50,8 @@ Git-flow에는 5가지 종류의 브랜치가 존재합니다. 항상 유지되�
 * release : 이번 출시 버전을 준비하는 브랜치
 * hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치
 
-Git-flow를 설명하는 그림 중 이만한 그림은 없는 것 같습니다. 
+Git-flow를 설명하는 그림 중 이만한 그림은 없는 것 같습니다.
+
 ![](http://woowabros.github.io/img/2017-10-30/git-flow_overall_graph.png)
 
 git-flow_overall_graph
@@ -82,16 +84,21 @@ Github-flow에서 Git-flow로 변경됐지만 하나의 티켓을 처리하는 �
 앞서 ‘작업을 할 때 지켜야 할 서로 간의 약속’에서 ‘하나의 티켓은 되도록 하나의 커밋으로 한다’라고 했습니다. 그래서 기능을 구현하기 전에 여러 개의 티켓으로 작업을 먼저 나누게 됩니다. 나눠진 작업 티켓 중 ‘로그인 레이아웃 생성’이라는 티켓이 있고 이 티켓을 처리한다고 가정하고 살펴보겠습니다.
 
 1. upstream/feature-user 브랜치에서 작업 브랜치(bfm-100_login_layout)를 생성합니다.
-(feature-user)]gitfetchupstream(feature−user)] git checkout -b bfm-100_login_layout --track upstream/feature-user
+    
+    (feature-user)]gitfetchupstream(feature−user)] git checkout -b bfm-100_login_layout --track upstream/feature-user
 2. 작업 브랜치에서 소스코드를 수정합니다. (뚝딱뚝딱 :hammer:)
 3. 작업 브랜치에서 변경사항을 커밋합니다. (보통은 vi editor에서 커밋 메세지를 작성 함)
-(bfm-100_login_layout)]$ git commit -m “BFM-100 로그인 화면 레이아웃 생성”
+    
+    (bfm-100_login_layout)]$ git commit -m “BFM-100 로그인 화면 레이아웃 생성”
 4. 만약 커밋이 불필요하게 어려 개로 나뉘어져 있다면 squash를 합니다. (커밋 2개를 합쳐야 한다면)
-(bfm-100_login_layout)]$ git rebase -i HEAD~2
+    
+    (bfm-100_login_layout)]$ git rebase -i HEAD~2
 5. 작업 브랜치를 upstream/feature-user에 rebase합니다.
-(bfm-100_login_layout)]$ git pull --rebase upstream feature-user
+    
+    (bfm-100_login_layout)]$ git pull --rebase upstream feature-user
 6. 작업 브랜치를 origin에 push합니다.
-(bfm-100_login_layout)]$ git push origin bfm-100_login_layout
+    
+    (bfm-100_login_layout)]$ git push origin bfm-100_login_layout
 7. Github에서 bfm-100_login_layout 브랜치를 feature-user에 merge하는 Pull Request를 생성합니다.
 8. 같은 feature를 개발하는 동료에게 리뷰 승인을 받은 후 자신의 Pull Request를 merge합니다. 만약 혼자 feature를 개발한다면 1~2명의 동료에게 리뷰 승인을 받은 후 Pull Request를 merge합니다.
 
@@ -104,13 +111,15 @@ Github-flow에서 Git-flow로 변경됐지만 하나의 티켓을 처리하는 �
 
 아래 그래프를 보시면 rebase를 했을 때 그래프가 얼마나 단순해지는지 볼 수 있습니다.
 
-git-branch-strategy-graph-no-normal
+
 ![](http://woowabros.github.io/img/2017-10-30/github-flow_graph_for_no_rebase.png)
+git-branch-strategy-graph-no-normal
 [4,5번 작업을 수행하지 않는 경우]
 
 
-git-branch-strategy-graph-no-normal
+
 ![](http://woowabros.github.io/img/2017-10-30/github-flow_graph_for_rebase.png)
+git-branch-strategy-graph-no-normal
 [4,5번 작업을 수행한 경우]
 
 
