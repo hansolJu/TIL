@@ -14,3 +14,18 @@ for (var i = 0, len = temp_users.length; i < len; i++) {
     if (users[i].age < 30) temp_users.push(users[i]);
 }
 console.log(temp_users[i].age);// 4
+
+//2 그들의 나이만 다시 모아서 출력.
+var ages = [];
+for (var i = 0, len = temp_users.length; i < len; i++) {
+    ages.push(temp_users[i].age);
+}
+console.log(ages); //[25, 28, 27, 24]
+
+//3 나이가 30 이상인 temp_users가 몇명인지를 출력.
+var temp_users = [];
+for(var i=0, len = users.length; i<len; i++){
+    if(users[i].age >=30) temp_users.push(users[i]);
+}
+console.log(temp_users.length) //3
+
