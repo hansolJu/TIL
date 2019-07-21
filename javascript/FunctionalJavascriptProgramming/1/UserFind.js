@@ -9,11 +9,22 @@ var users = [
 ];
 
 //1 users중에 age가 30미만인 users[i]만 모아서 몇 명인지를 출력.
-var temp_users = [];
+/* var temp_users = [];
 for (var i = 0, len = temp_users.length; i < len; i++) {
     if (users[i].age < 30) temp_users.push(users[i]);
 }
-console.log(temp_users[i].age);// 4
+console.log(temp_users[i].age);// 4 */
+
+function filter(list, predicate) {
+    var new_list = [];
+    for (var i = 0, len = list.length; i < len; i++) {
+        if (predicate(list[i])) new_list.push(list[i]);
+    }
+    return new_list;
+}
+var users_under_30 = filter(users, function (user) { return user.age < 30 });
+console.log(users_under_30.length);// 4
+
 
 //2 그들의 나이만 다시 모아서 출력.
 var ages = [];
