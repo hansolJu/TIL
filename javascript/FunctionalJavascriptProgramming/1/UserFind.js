@@ -8,7 +8,7 @@ var users = [
     { id: 7, name: "HI", age: 24 }
 ];
 
-//1 users중에 age가 30미만인 users[i]만 모아서 몇 명인지를 출력.
+//1 users중에 age가 30미만인 users[i]만 모아서 몇 명인지를 출력. --- filter함수의 사용.
 /* var temp_users = [];
 for (var i = 0, len = temp_users.length; i < len; i++) {
     if (users[i].age < 30) temp_users.push(users[i]);
@@ -32,12 +32,21 @@ for(var i=0,len=users_over_30.length;i<len; i++){
 console.log(names);//["ID","BJ","JM"]
 
 
-//2 그들의 나이만 다시 모아서 출력.
-var ages = [];
+//2 그들의 나이만 다시 모아서 출력. --- map 함수의 사용
+/* var ages = [];
 for (var i = 0, len = temp_users.length; i < len; i++) {
     ages.push(temp_users[i].age);
 }
-console.log(ages); //[25, 28, 27, 24]
+console.log(ages); //[25, 28, 27, 24] */
+
+// 바꾼 코드 - new_list에 무엇을 push할지에 대해 iteratee 함수에게 위임.
+function map(list,iteratee){
+    var new_list = [];
+    for(var i=0, len=list.length; i<len; i++){
+        new_list.push(iteratee(list[i]));
+    }
+    return new_list;
+}
 
 //3 나이가 30 이상인 temp_users가 몇명인지를 출력.
 var temp_users = [];
