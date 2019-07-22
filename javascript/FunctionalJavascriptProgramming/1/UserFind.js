@@ -22,11 +22,11 @@ function filter(list, predicate) {
     }
     return new_list;
 }
-                                    //predicate
+//predicate
 var users_under_30 = filter(users, function (user) { return user.age < 30 });
 console.log(users_under_30.length);// 4
 var names = [];
-for(var i=0,len=users_over_30.length;i<len; i++){
+for (var i = 0, len = users_over_30.length; i < len; i++) {
     names.push(users_over_30[i].name);
 }
 console.log(names);//["ID","BJ","JM"]
@@ -39,14 +39,28 @@ for (var i = 0, len = temp_users.length; i < len; i++) {
 }
 console.log(ages); //[25, 28, 27, 24] */
 
+//코드 1-8 map
 // 바꾼 코드 - new_list에 무엇을 push할지에 대해 iteratee 함수에게 위임.
-function map(list,iteratee){
+function map(list, iteratee) {
     var new_list = [];
-    for(var i=0, len=list.length; i<len; i++){
+    for (var i = 0, len = list.length; i < len; i++) {
         new_list.push(iteratee(list[i]));
     }
     return new_list;
 }
+
+//코드 1-9 map의 사용.
+var users_under_30 = filter(users, function (user) { return user.age < 30 });
+console.log(users_under_30);//4
+
+var ages = map(users_under_30, function (user) { return user.age; });
+console.log(ages); //[25, 28, 27, 24]
+
+var users_over_30 = filter(users, function (user) { return user.age >= 30 });
+console.log(users_over_30.length);//3
+
+var names = map(users_over_30, function (user) { return user.name; });
+console.log(names); // ["ID","BJ","JM"]
 
 //3 나이가 30 이상인 temp_users가 몇명인지를 출력.
 var temp_users = [];
