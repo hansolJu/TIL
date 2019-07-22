@@ -22,8 +22,14 @@ function filter(list, predicate) {
     }
     return new_list;
 }
+                                    //predicate
 var users_under_30 = filter(users, function (user) { return user.age < 30 });
 console.log(users_under_30.length);// 4
+var names = [];
+for(var i=0,len=users_over_30.length;i<len; i++){
+    names.push(users_over_30[i].name);
+}
+console.log(names);//["ID","BJ","JM"]
 
 
 //2 그들의 나이만 다시 모아서 출력.
