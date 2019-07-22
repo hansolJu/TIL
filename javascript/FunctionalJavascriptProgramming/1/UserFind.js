@@ -50,17 +50,27 @@ function map(list, iteratee) {
 }
 
 //코드 1-9 map의 사용.
+//회원 나이가 30세 미만인 사람들을 뽑아 users_under_30에 담는다.
 var users_under_30 = filter(users, function (user) { return user.age < 30 });
 console.log(users_under_30);//4
-
+//users_under_30에 담긴 회원의 나이만 뽑아서 출력한다.
 var ages = map(users_under_30, function (user) { return user.age; });
 console.log(ages); //[25, 28, 27, 24]
-
+//회원중 나이가 30세 이상인 사람들을 뽑아 users_over_30에 담는다.
 var users_over_30 = filter(users, function (user) { return user.age >= 30 });
 console.log(users_over_30.length);//3
-
+//users_over_30에 담긴 회원의 이름만 뽑아서 출력한다.
 var names = map(users_over_30, function (user) { return user.name; });
 console.log(names); // ["ID","BJ","JM"]
+
+//코드 1-10 함수 중첩
+var ages = map( filter(users, function(user) { return user.age < 30 }), function(user) { return user.age; });
+console.log(ages.length); // 4
+console.log(ages); // [25, 28, 27, 24]
+
+var names = map( filter(users, function(user) { return user.age >= 30 }), function(user) { return user.name; });
+console.log(names.length); // 3
+console.log(names); // ["ID", "BJ", "JM"]
 
 //3 나이가 30 이상인 temp_users가 몇명인지를 출력.
 var temp_users = [];
