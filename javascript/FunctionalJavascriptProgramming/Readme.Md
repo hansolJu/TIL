@@ -237,8 +237,9 @@ filter(users, function(user) { return user.age < 30 });
 함수형 프로그래밍에서는 ‘항상 동일하게 동작하는 함수’를 만들고 보조 함수를 조합하는 식으로 로직을 완성한다. 내부에서 관리하고 있는 상태를 따로 두지 않고 넘겨진 인자에만 의존한다. 동일한 인자가 들어오면 항상 동일한 값을 리턴하도록 한다. 보조 함수 역시 인자이며, 보조 함수에서도 상태를 변경하지 않으면 보조 함수를 받은 함수는 항상 동일한 결과를 만드는 함수가 된다.
 
 객체지향적으로 작성된 코드에서도 이전 객체와 같은 상태를 지닌 새 객체를 만드는 식으로 부수 효과를 줄일 수 있다. 그러나 무수히 많고 각기 다른 종류로 나누어진 객체들을 복사하는 식으로 다루는 것은 운용도 어렵고 객체지향과 어울리지 않는다. 자신의 상태를 메서드를 통해 변경하는 것은 객체지향의 단점이 아니라 객체지향의 방법론 그 자체이다. 반면에 함수형 프로그래밍은 부수 효과를 최소화하는 것이 목표에 가깝다. 이것은 단점이냐 장점이냐의 이야기가 아니라 지향점의 차이에 대한 것이다.
-
+```
 많은 사람들이 함수형 프로그래밍은 객체지향과 완전한 대척점에 있다고 생각하거나 그런 주장을 하기도 한다. 이것은 오해다. 결국에는 함께 동작해야 한다. 현대 프로그래밍에서 다루는 값은 대부분 객체이므로 함수형 프로그래밍에서도 결국 객체를 다뤄야 한다. 다만 기능 확장을 객체의 확장으로 풀어가느냐 함수 확장으로 풀어가느냐의 차이다. 객체를 확장하느냐 객체를 다루는 함수를 늘리느냐의 차이이며 추상화의 단위가 클래스이냐 함수이냐의 차이다.
+```
 
 ## 1.2.4 map 함수
 
@@ -310,23 +311,13 @@ console.log(names);
 
 [코드 1-10] 함수 중첩
 ```javascript
-var ages = map(
-  filter(users, function(user) { return user.age < 30 }),
-  function(user) { return user.age; });
+var ages = map( filter(users, function(user) { return user.age < 30 }), function(user) { return user.age; });
+console.log(ages.length); // 4
+console.log(ages); // [25, 28, 27, 24]
 
-console.log(ages.length);
-// 4
-console.log(ages);
-// [25, 28, 27, 24]
-
-var names = map(
-  filter(users, function(user) { return user.age >= 30 }),
-  function(user) { return user.name; });
-
-console.log(names.length);
-// 3
-console.log(names);
-// ["ID", "BJ", "JM"]
+var names = map( filter(users, function(user) { return user.age >= 30 }), function(user) { return user.name; });
+console.log(names.length); // 3
+console.log(names); // ["ID", "BJ", "JM"]
 
 ```
 
