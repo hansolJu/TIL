@@ -29,5 +29,18 @@ int main(int argc, char *argv[]){
     if(connect(sock,(struct sockaddr*)&serv_addr,sizeof(serv_addr))==-1)
         error_handling("connect() error!");
     
-    
+    str_len=read(sock, message, sizeof(message)-1);
+	if(str_len==-1)
+		error_handling("read() error!");
+	
+	printf("Message from server: %s \n", message);  
+	close(sock);
+	return 0;
+}
+
+void error_handling(char *message)
+{
+	fputs(message, stderr);
+	fputc('\n', stderr);
+	exit(1);
 }
