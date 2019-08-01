@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(atoi(argv[1]));
 //bind 함수 호출 - ip주소와 Port번호 할당
-    if (bind(serv_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1)
-        error_handling("listen() error");
+    if(bind(serv_sock, (struct sockaddr*) &serv_addr, sizeof(serv_addr))==-1 )
+        error_handling("bind() error");
 //listen함수 호출 - 연결요청 가능 상태로 변경
     if (listen(serv_sock, 5) == -1)
         error_handling("listen() error");
@@ -53,6 +53,6 @@ int main(int argc, char *argv[])
 void error_handling(char *message)
 {
     fputs(message, stderr);
-    fputc('/n', stderr);
+    fputc('\n', stderr);
     exit(1);
 }
