@@ -29,3 +29,70 @@
 - 0~1023은 잘 알려진 PORT(Well-known PORT)라 해서 이미 용도가 결정되어 있다.
 ---
 
+# 2. 주소 정보의 표현
+## IPv4 기반의 주소 표현을 위한 구조체
+
+- IP주소와 PORT번호는 구조체 sockaddr_in의 변수에 담아서 표현한다.
+```c
+struct sockaddr_in{
+    sa_family_t sin_family;//주소체계
+    uint16_t    sin_port;//port번호
+    struct in_addr  sin_addr;//32비트 ip주소
+    char    sin_zero[8];//사용되지 않음.
+};
+
+struct in_addr{
+    in_addr_t   s_addr;//32비트 ipv4인터넷 주소
+}
+```
+int8_t      signed 8-bit int
+uint8_t     unsigned 8-bit int (unsigned char)
+int16_t     signed 16-bit int (unsigned char)
+uint16_t    unsigned 16-bit int (unsigned short)
+int32_t     signed 32-bit int (unsigned long)
+
+sa_family_t 주소체계
+socklen_t   길이정보(length of struct)
+
+in_addr_t   ip주소정보, uint32_t로 정의되어 있음
+in_port_t   PORT번호정보, uint16_t로 정의되어있음.
+
+## 구조체 sockaddr_in의 멤버에 대한 분석
+
+- 맴버 sin_family
+    - 주소체계 정보 저장
+
+- 맴버 sin_port
+    - 16비트 PORT번호 저장
+    - 네트워크 바이트 순소로 저장
+- 맴버 sin_addr
+    - 32비트 ip주소정보 저장
+    - 네트워크 바이트 순서로 저장
+    - 맴버 sin_addr의 구조체 자료형 in_addr 사실상 32비트 정수자료형
+- 맴버 sin_zero
+    - 특별한 의미를 지니지 않는 맴버.
+    - 반드시 0으로 채워야 한다. ->구조체 크기를 맞추어주는 역할
+
+## 구조체 sockaddr_in의 활용의 예
+
+- 구조체 변수 sockaddr_in은 bind 함수의 인자로 전달되는데, 매개변수 형이 sockaddr이므로 형 변환을 해야만 한다.
+```c
+struct sockaddr_in serv_addr;
+
+//......
+if(bind(serv_sock,(struct sockaddr*) &serv_addr, sizeof(serv_addr))== -1)
+    error_handling("bind() error");
+//......
+
+```
+
+- 구조체 sockaddr은 다양한 주소체계의 주소정보를 담을 수 있도록 정의되었다. 그래서 IPv4의 주소정보를 담기가 불편하다. 이예 동일한 바인트 열을 구성하는 구조체 sockaddr_in이 정의되어있으며, 이를 이용해서 쉽게 IPv4의 주소정보를 담을 수 있다.
+
+```c
+struct sockaddr{
+    sa_family_t sin_family; //주소체계
+    char        sa_data[14]; //주소정보
+}
+```
+
+---
