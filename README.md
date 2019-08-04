@@ -11,4 +11,4 @@ For a steady stream of TILs from a variety of rocketeers.
 
 ## Categories
 
-- ![TCP/IP Socket Programming](https://github.com/hansolJu/TIL/tree/master/socket)
+- [TCP/IP Socket Programming](https://github.com/hansolJu/TIL/tree/master/socket)
